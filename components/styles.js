@@ -20,12 +20,15 @@ export const styles = StyleSheet.create({
       flex: 1,
     },
     nameInput: {
-        
+
     },
     categoryInput: {
 
     },
     pricateInput: {
 
+    },
+    scanInfoContainer: {
+        
     }
   });
