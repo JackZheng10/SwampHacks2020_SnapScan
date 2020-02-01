@@ -3,11 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
+import Test from "./components/test.js";
+import {styles} from './components/styles.js'
 
 export default class CameraScreen extends Component {
   state = {
     permission: null,
-    camera: null
+    camera: null,
+    listOfThings: "test",
   };
 
   componentDidMount = async () => {
@@ -43,6 +46,7 @@ export default class CameraScreen extends Component {
         console.log(reason);
       }
     );
+    this.setState({listOfThings:"change"});
   };
 
   render() {
@@ -58,12 +62,10 @@ export default class CameraScreen extends Component {
           flex: 1
         }}
         initialPage={1}
-        orientation="vertical"
+        orientation="horizontal"
       >
+
         <View key="0" style={styles.slideBody}>
-          <Text>test</Text>
-        </View>
-        <View key="1" style={styles.slideBody}>
           <Camera
             style={{ flex: 1 }}
             ratio="16:9"
@@ -86,32 +88,11 @@ export default class CameraScreen extends Component {
             </TouchableOpacity>
           </Camera>
         </View>
+        <Test test={this.state.listOfThings}/>
         <View key="2" style={styles.slideBody}>
-          <Text>test2</Text>
+          <Text>test</Text>
         </View>
       </ViewPager>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  takeButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginBottom: 20,
-    padding: 5,
-    borderRadius: 40,
-    width: 80,
-    height: 80,
-    borderWidth: 5,
-    borderColor: "white",
-    backgroundColor: "transparent"
-  },
-  buttonText: {
-    color: "white"
-  },
-  slideBody: {
-    flex: 1,
-  }
-});
