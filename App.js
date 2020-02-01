@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import Swiper from 'react-native-swiper';
+import ViewPager from "@react-native-community/viewpager";
 
 export default class CameraScreen extends Component {
   state = {
@@ -17,24 +17,34 @@ export default class CameraScreen extends Component {
     console.log(this.state.permission);
   };
 
-  take = async (cam) => {
+  take = async cam => {
     //console.log(cam);
     const options = { quality: 1, base64: true, exif: true };
     console.log("trying taking picture");
 
-    const data =await cam.takePictureAsync(options);
+    const data = await cam.takePictureAsync(options);
     console.log("done");
     console.log("trying sending to server");
-    fetch('http://10.136.104.219:3001/blog', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    }).then((res)=>{res.json().then((response)=>{console.log(response); console.log("succeed");})}, (reason)=>{console.log(reason);});
-    
+    fetch("http://10.136.104.219:3001/blog", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(
+      res => {
+        res.json().then(response => {
+          console.log(response);
+          console.log("succeed");
+        });
+      },
+      reason => {
+        console.log(reason);
+      }
+    );
   };
+
   render() {
     if (this.state.permission == null) {
       return <View />;
@@ -43,43 +53,43 @@ export default class CameraScreen extends Component {
       return <Text>No access to camera</Text>;
     }
     return (
-      <Swiper
-        loop={false} 
-        showsPagination={false} 
-        index={0}
-        removeClippedSubviews={true}
-        horizontal={false}
+      <ViewPager
+        style={{
+          flex: 1
+        }}
+        initialPage={1}
+        orientation="vertical"
       >
-      <View style={styles.slideBody}>
-        <Camera
-          style={{ flex: 1 }}
-          ratio="16:9"
-          ref={ref => {
-            this.camera = ref;
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "transparent",
-              flexDirection: "row"
+        <View key="0" style={styles.slideBody}>
+          <Text>test</Text>
+        </View>
+        <View key="1" style={styles.slideBody}>
+          <Camera
+            style={{ flex: 1 }}
+            ratio="16:9"
+            ref={ref => {
+              this.camera = ref;
             }}
-          ></View>
-          <TouchableOpacity
-            style={styles.takeButton}
-            onPress={() => this.take(this.camera)}
           >
-            <MaterialIcons name="camera" size={40} color="white" />
-          </TouchableOpacity>
-        </Camera>
-      </View>
-      <View style={styles.slideBody}>
-        <Text>test</Text>
-      </View>
-      <View style={styles.slideBody}>
-        <Text>test2</Text>
-      </View>
-      </Swiper>
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "transparent",
+                flexDirection: "row"
+              }}
+            ></View>
+            <TouchableOpacity
+              style={styles.takeButton}
+              onPress={() => this.take(this.camera)}
+            >
+              <MaterialIcons name="camera" size={40} color="white" />
+            </TouchableOpacity>
+          </Camera>
+        </View>
+        <View key="2" style={styles.slideBody}>
+          <Text>test2</Text>
+        </View>
+      </ViewPager>
     );
   }
 }
