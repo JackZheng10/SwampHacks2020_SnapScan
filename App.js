@@ -2,6 +2,7 @@ import React, { useState, useEffect, Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import Swiper from 'react-native-swiper';
 
 export default class CameraScreen extends Component {
   state = {
@@ -42,7 +43,14 @@ export default class CameraScreen extends Component {
       return <Text>No access to camera</Text>;
     }
     return (
-      <View style={{ flex: 1 }}>
+      <Swiper
+        loop={false} 
+        showsPagination={false} 
+        index={0}
+        removeClippedSubviews={true}
+        horizontal={false}
+      >
+      <View style={styles.slideBody}>
         <Camera
           style={{ flex: 1 }}
           ratio="16:9"
@@ -65,6 +73,13 @@ export default class CameraScreen extends Component {
           </TouchableOpacity>
         </Camera>
       </View>
+      <View style={styles.slideBody}>
+        <Text>test</Text>
+      </View>
+      <View style={styles.slideBody}>
+        <Text>test2</Text>
+      </View>
+      </Swiper>
     );
   }
 }
@@ -85,5 +100,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white"
+  },
+  slideBody: {
+    flex: 1
   }
 });
