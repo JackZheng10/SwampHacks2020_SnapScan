@@ -33,7 +33,5 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
     fontSize: 30
   },
-  scanInfoTypes: {
-    flex: 1
-  }
+  scanInfoTypes: {}
 });

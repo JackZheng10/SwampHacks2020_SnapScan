@@ -1,9 +1,10 @@
 import React from "react";
 import { Text, View, SafeAreaView, TextInput, ScrollView } from "react-native";
 import { styles } from "./styles.js";
-import { Header, Button } from "react-native-elements";
+import { Header, Icon } from "react-native-elements";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-class Test extends React.Component {
+class ScanInfoScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.slideBody}>
@@ -17,14 +18,39 @@ class Test extends React.Component {
         />
         <View
           style={{
-            flexDirection: "row"
+            flexDirection: "row",
+
+            alignItems: "center",
+            margin: 10,
+            justifyContent: "space-evenly"
           }}
         >
-          <Button title="test" type="outline" style={styles.scanInfoTypes} />
-          <Button title="test2" type="outline" style={styles.scanInfoTypes} />
-          <Button title="test3" type="outline" style={styles.scanInfoTypes} />
-          <Button title="test4" type="outline" style={styles.scanInfoTypes} />
-          <Button title="test5" type="outline" style={styles.scanInfoTypes} />
+          <Icon
+            reverse
+            raised
+            name="tshirt-crew"
+            type="material-community"
+            color="red"
+          />
+          <Icon
+            reverse
+            name="cart-minus"
+            type="material-community"
+            color="red"
+          />
+          <Icon
+            reverse
+            name="silverware-fork-knife"
+            type="material-community"
+            color="red"
+          />
+          <Icon reverse name="popcorn" type="material-community" color="red" />
+          <Icon
+            reverse
+            name="border-none-variant"
+            type="material-community"
+            color="red"
+          />
         </View>
 
         <ScrollView></ScrollView>
@@ -33,4 +59,4 @@ class Test extends React.Component {
   }
 }
 
-export default Test;
+export default ScanInfoScreen;
