@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
     color: "white"
   },
   slideBody: {
-    flex: 1
+    flex: 1,
   }
 });
