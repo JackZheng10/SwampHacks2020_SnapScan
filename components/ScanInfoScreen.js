@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TextInput, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, TextInput } from 'react-native';
 import {styles} from './styles.js'
 
   class Test extends React.Component {
@@ -7,9 +7,7 @@ import {styles} from './styles.js'
    render() {
     return (
         <View key="2" style={styles.slideBody}>
-            <ScrollView>
-                
-            </ScrollView>
+            <Text>something</Text>
         </View>
     );
     }

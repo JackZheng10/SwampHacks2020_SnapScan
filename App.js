@@ -1,16 +1,22 @@
 import React, { useState, useEffect, Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Modal} from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
 import Test from "./components/test.js";
-import {styles} from './components/styles.js'
+import {styles} from './components/styles.js';
+import ScanInfoScreen from './components/ScanInfoScreen.js';
 
+const servURL = "http://10.136.104.219:3001/blog";
+const lservURL = "http://10.140.187.64:5000/blog";
 export default class CameraScreen extends Component {
   state = {
     permission: null,
     camera: null,
     listOfThings: "test",
+    indicatorColors: ["#70C4FF","#3FC272","#F5E184","#F56B5E"],
+    indicatorIndex: 0,
+    showLoading: false
   };
 
   componentDidMount = async () => {
@@ -18,32 +24,43 @@ export default class CameraScreen extends Component {
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
+    setTimeout(()=>{this.changeColor()}, 800);
   };
 
-  take = async cam => {
+  changeColor = async()=> {
+    this.setState({indicatorIndex:this.state.indicatorIndex + 1});
+      if(this.state.indicatorIndex > this.state.indicatorColors.length)
+        this.setState({indicatorIndex:0});
+    setTimeout(()=>{
+      this.changeColor();
+    }, 800);
+  }
+
+  take = async (cam) => {
     //console.log(cam);
     const options = { quality: 1, base64: true, exif: true };
     console.log("trying taking picture");
+    this.setState({showLoading:true});
 
     const data = await cam.takePictureAsync(options);
     console.log("done");
+    //console.log(data.base64);
     console.log("trying sending to server");
-    fetch("http://10.136.104.219:3001/blog", {
+    fetch(lservURL, {
       method: "POST",
+      Accept: "application/json",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     }).then(
       res => {
-        res.json().then(response => {
-          console.log(response);
-          console.log("succeed");
-        });
+        res.text().then((content)=>{console.log(content)});
+        this.setState({showLoading:false});
       },
       reason => {
         console.log(reason);
+        this.setState({showLoading:false});
       }
     );
     this.setState({listOfThings:"change"});
@@ -64,8 +81,11 @@ export default class CameraScreen extends Component {
         initialPage={1}
         orientation="horizontal"
       >
-
         <View key="0" style={styles.slideBody}>
+          <Text>test</Text>
+        </View>
+
+        <View key="1" style={styles.slideBody}>
           <Camera
             style={{ flex: 1 }}
             ratio="16:9"
@@ -87,11 +107,12 @@ export default class CameraScreen extends Component {
               <MaterialIcons name="camera" size={40} color="white" />
             </TouchableOpacity>
           </Camera>
+          <Modal transparent={true} style={{flex:1, justifyContent: 'center', alignItems: 'center'}} visible={this.state.showLoading}>
+            <ActivityIndicator size={"large"} color={this.state.indicatorColors[this.state.indicatorIndex]} style={{marginTop: 200}}/>
+          </Modal>
         </View>
         <Test test={this.state.listOfThings}/>
-        <View key="2" style={styles.slideBody}>
-          <Text>test</Text>
-        </View>
+        
       </ViewPager>
     );
   }
