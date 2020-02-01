@@ -67,16 +67,24 @@ def get_receipt_data(file, context):
     print('-------------------------------')
 
     # Save Data to Output Bucket
-    data = ''
+    '''data = ''
     data += f'{len(prices)}\n'
     for price in prices:
         data += f'{price["final_text"]}\n'
         data += f'{price["price"]:.2f}\n'
     data += f'{total_price:.2f}\n'
+    '''
+    data = {}
+    for price in prices:
+        data[price['final_text']] = price['price']
+    data['total'] = total_price
 
     output_bucket = storage_client.get_bucket(OUTPUT_BUCKET_NAME)
-    blob = output_bucket.blob(f'{name[:name.find(".")]}-data.txt')
-    blob.upload_from_string(data)
+    blob = output_bucket.blob(f'{name[:name.find(".")]}-data.json')
+    file_object = io.StringIO()
+    json.dump(data, file_object)
+    file_object.seek(0)
+    blob.upload_from_file(file_object)
 
 
 '''
