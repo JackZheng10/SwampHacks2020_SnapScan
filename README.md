@@ -1,1 +1,1 @@
-## SwampHacks2020 - Team Spice and Rice
+## SwampHacks 2020 - Team Spice and Rice
