@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://k7-5bi.holeeman.swamphacks2020-snapscan.exp.direct",
-  "packagerNgrokUrl": "https://packager.k7-5bi.holeeman.swamphacks2020-snapscan.exp.direct",
-  "ngrokPid": 22435,
-  "devToolsPort": 19002,
-  "packagerPort": 19003,
-  "packagerPid": 22417
+  "expoServerNgrokUrl": "https://f4-7m3.anonymous.swamphacks2020-snapscan.exp.direct",
+  "packagerNgrokUrl": "https://packager.f4-7m3.anonymous.swamphacks2020-snapscan.exp.direct",
+  "ngrokPid": 12996,
+  "devToolsPort": 19006,
+  "packagerPort": 19001,
+  "packagerPid": 15820
 }
