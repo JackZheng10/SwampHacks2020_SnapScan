@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Snap Scan",
-    "slug": "com.swamphacks.snapscan",
+    "slug": "SwampHacks2020_SnapScan",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [

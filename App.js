@@ -16,13 +16,10 @@ export default function App() {
 
   take = async () => {
     console.log("trying taking picture");
-    Camera.takePictureAsync({
-      quality: 1,
-      base64: true,
-      onPictureSaved: (uri, width, height, exif, base64)=>{
-        console.log(uri);
-      }
-    })
+    //Camera.takePictureAsync({
+    //  quality: 1,
+    //  base64: true,
+    //}).then((uri)=>{console.log(uri)});
   }
 
   if (hasPermission === null) {
@@ -42,7 +39,7 @@ export default function App() {
           }}>
           
         </View>
-        <TouchableOpacity style={styles.takeButton} onPressout={take()}>
+        <TouchableOpacity style={styles.takeButton} onPressout={()=>{console.log("test");}}>
             <Text>Take</Text>
           </TouchableOpacity>
       </Camera>
