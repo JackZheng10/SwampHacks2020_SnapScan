@@ -16,7 +16,8 @@ export default class CameraScreen extends Component {
     listOfThings: "test",
     indicatorColors: ["#70C4FF","#3FC272","#F5E184","#F56B5E"],
     indicatorIndex: 0,
-    showLoading: false
+    showLoading: false,
+    showScanInfoScreen: true,
   };
 
   componentDidMount = async () => {
@@ -109,6 +110,9 @@ export default class CameraScreen extends Component {
           </Camera>
           <Modal transparent={true} style={{flex:1, justifyContent: 'center', alignItems: 'center'}} visible={this.state.showLoading}>
             <ActivityIndicator size={"large"} color={this.state.indicatorColors[this.state.indicatorIndex]} style={{marginTop: 200}}/>
+          </Modal>
+          <Modal visible={this.state.showScanInfoScreen}>
+            <ScanInfoScreen/>
           </Modal>
         </View>
         <Test test={this.state.listOfThings}/>
