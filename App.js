@@ -16,12 +16,22 @@ export default class App extends Component {
   }
 
   take = async (cam) => {
-    console.log(cam);
+    //console.log(cam);
     const options = { quality: 1, base64: true, exif: true };
     console.log("trying taking picture");
 
-    var test =await cam.takePictureAsync(options);
-    console.log(test);
+    const data =await cam.takePictureAsync(options);
+    console.log("done");
+    console.log("trying sending to server");
+    fetch('http://10.136.104.219:3001/blog', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    }).then((res)=>{res.json().then((response)=>{console.log(response); console.log("succeed");})}, (reason)=>{console.log(reason);});
+    
   };
   render() {
     if (this.state.permission == null) {
