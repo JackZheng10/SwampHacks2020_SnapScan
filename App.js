@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Camera } from 'expo-camera';
-
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Camera } from "expo-camera";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -10,17 +9,18 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     })();
   }, []);
 
   take = async () => {
+    const options = { quality: 1, base64: true, exif: true };
     console.log("trying taking picture");
-    //Camera.takePictureAsync({
-    //  quality: 1,
-    //  base64: true,
-    //}).then((uri)=>{console.log(uri)});
-  }
+
+    await Camera.takePictureAsync(options).then(result => {
+      console.log(result.width);
+    });
+  };
 
   if (hasPermission === null) {
     return <View />;
@@ -30,22 +30,22 @@ export default function App() {
   }
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type}>
+      <Camera style={{ flex: 1 }} type={type} ratio="16:9">
         <View
           style={{
             flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-          }}>
-          
-        </View>
-        <TouchableOpacity style={styles.takeButton} onPressout={()=>{console.log("test");}}>
-            <Text>Take</Text>
-          </TouchableOpacity>
+            backgroundColor: "transparent",
+            flexDirection: "row"
+          }}
+        ></View>
+        <TouchableOpacity style={styles.takeButton} onPress={take}>
+          <Text>Take</Text>
+        </TouchableOpacity>
       </Camera>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   takeButton: {
     width: 100,
