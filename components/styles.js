@@ -32,5 +32,8 @@ export const styles = StyleSheet.create({
     color: "white",
     marginBottom: 25,
     fontSize: 30
+  },
+  scanInfoTypes: {
+    flex: 1
   }
 });
