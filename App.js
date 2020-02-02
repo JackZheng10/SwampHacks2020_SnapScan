@@ -22,6 +22,7 @@ import * as FileSystem from "expo-file-system"
 
 const servURL = "http://10.140.189.199:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
+const saveFile = "save.txt"
 export default class CameraScreen extends Component {
   state = {
     permission: null,
@@ -39,14 +40,16 @@ export default class CameraScreen extends Component {
 
   addReceipt = (itemsList, totalPrice) => {
     const newReceiptList = this.state.receiptList;
+    const d = new Date();
+    const curDate = d.getFullYear() + "-" +(d.getMonth()+1) + "-" + d.getDate();
     newReceiptList.push({
       items: itemsList,
       total: totalPrice,
-      date: (new Date()).toString()
+      date: curDate
     });
     console.log(newReceiptList);
     this.setState({receiptList:newReceiptList});
-    FileSystem.writeAsStringAsync(FileSystem.documentDirectory+"/data.txt", JSON.stringify(this.state.receiptList)).then(()=>{},(reason)=>{console.log(reason)});
+    FileSystem.writeAsStringAsync(FileSystem.documentDirectory+"/"+saveFile, JSON.stringify(this.state.receiptList)).then(()=>{},(reason)=>{console.log(reason)});
     this.toggleResult(false);
   }
 
@@ -55,7 +58,7 @@ export default class CameraScreen extends Component {
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
-    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/data.txt").then((data)=>{const d = JSON.parse(data); this.setState({receiptList:d})}, (reason)=>{});
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/"+saveFile).then((data)=>{const d = JSON.parse(data); this.setState({receiptList:d})}, (reason)=>{});
     setTimeout(() => {
       this.changeColor();
     }, 800);
