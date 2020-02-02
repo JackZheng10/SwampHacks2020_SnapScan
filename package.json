@@ -11,11 +11,13 @@
     "@react-native-community/viewpager": "2.0.2",
     "expo": "~36.0.0",
     "expo-camera": "~8.0.0",
+    "prop-types": "^15.7.2",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-chart-kit": "^4.4.1",
     "react-native-elements": "^1.2.7",
+    "react-native-svg": "9.13.3",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
