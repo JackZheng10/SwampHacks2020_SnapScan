@@ -72,6 +72,7 @@ export default class CameraScreen extends Component {
           console.log(content);
         });
         this.setState({ showLoading: false });
+        this.setState({showScanInfoScreen: true});
       },
       reason => {
         console.log(reason);
