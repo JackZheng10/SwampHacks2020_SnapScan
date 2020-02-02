@@ -70,7 +70,7 @@ const lineData = {
   labels: ["January", "February", "March", "April", "May", "June"],
   datasets: [
     {
-      data: [{data:[1,2,3,4,5,6]},{data:[1,2,3,4,5,6]}]
+      data: [1,2,3,4,5,6]
     }
   ]
 };

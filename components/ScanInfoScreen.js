@@ -1,64 +1,40 @@
 import React from "react";
-import { Text, View, SafeAreaView, TextInput, ScrollView } from "react-native";
+import { Text, View, SafeAreaView, TextInput, ScrollView , TouchableOpacity} from "react-native";
 import { styles } from "./styles.js";
 import { Header, Icon, ListItem, Badge, Button } from "react-native-elements";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class ScanInfoScreen extends React.Component {
+    
+
+    updateList = async () => {
+        data.map((name, price)=>{
+            console.log(name);
+            console.log(price);
+        });
+    }
+
+    selectCategory(c) {
+        this.setState({currentCategory:c});
+    }
+
+  //res = {"response":{"100% WW FIVE GR BR":1.9,"3\" NS SS SAUTE PAN":10.99,"PUBLIX BRAN FLAKES":2.85,"total":16.51}};
+  //  data = res.response;
+  state = {
+      ccolor:["white","#70C4FF", "#F56B5E", "#F5E184", "#3FC272","grey"],
+      icolor:["#F6F5F1", "#93D4FF", "#F5A497", "#F5EFAC", "#84C295", "#F6F5F1"],
+      currentCategory: 1
+  }
   list = [
     {
-      name: "Amy Farha",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-      subtitle: "Vice President"
+      name:"100% WW FIVE GR BR",
+      price:1.9,
+      category:5
     },
     {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
+        name:"NS SS SAUTE PAN",
+        price:10.99,
+        category:5
     }
   ];
 
@@ -88,6 +64,8 @@ class ScanInfoScreen extends React.Component {
             name="tshirt-crew"
             type="material-community"
             color="#70C4FF"
+            size={this.state.currentCategory==1? 30 : 25}
+            onPress={()=>this.selectCategory(1)}
           />
           <Icon
             reverse
@@ -95,6 +73,8 @@ class ScanInfoScreen extends React.Component {
             name="cart-minus"
             type="material-community"
             color="#F56B5E"
+            size={this.state.currentCategory==2? 30 : 25}
+            onPress={()=>this.selectCategory(2)}
           />
           <Icon
             reverse
@@ -102,6 +82,8 @@ class ScanInfoScreen extends React.Component {
             name="silverware-fork-knife"
             type="material-community"
             color="#F5E184"
+            size={this.state.currentCategory==3? 30 : 25}
+            onPress={()=>this.selectCategory(3)}
           />
           <Icon
             reverse
@@ -109,6 +91,8 @@ class ScanInfoScreen extends React.Component {
             name="popcorn"
             type="material-community"
             color="#3FC272"
+            size={this.state.currentCategory==4? 30 : 25}
+            onPress={()=>this.selectCategory(4)}
           />
           <Icon
             reverse
@@ -116,18 +100,18 @@ class ScanInfoScreen extends React.Component {
             name="border-none-variant"
             type="material-community"
             color="grey"
+            size={this.state.currentCategory==5? 30 : 25}
+            onPress={()=>this.selectCategory(5)}
           />
         </View>
         <ScrollView>
           <View>
             {this.list.map((l, i) => (
-              <ListItem
-                key={i}
-                leftAvatar={{ source: { uri: l.avatar_url } }}
-                title={l.name}
-                subtitle={l.subtitle}
-                bottomDivider
-              />
+              <View style={{height: 60, flexDirection: "row"}}>
+                  <TouchableOpacity style={{backgroundColor: this.state.ccolor[l.category], height: 60, flex:1}} onPressOut={()=>{l.category=this.state.currentCategory}}></TouchableOpacity>
+                  <TextInput placeholder="enter" value={l.name} style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
+                  <TextInput placeholder="enter" value={l.price.toString()} style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
+              </View>
             ))}
           </View>
         </ScrollView>
@@ -146,6 +130,7 @@ class ScanInfoScreen extends React.Component {
               name="cancel"
               type="material-community"
               color="#F56B5E"
+              onPress={()=>{this.props.toggle(false)}}
             />
             <Icon
               reverse

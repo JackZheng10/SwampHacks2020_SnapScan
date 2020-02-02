@@ -18,7 +18,7 @@ import StatisticsScreen from "./components/StatisticsScreen.js";
 import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
 
-const servURL = "http://10.140.189.199:3001/blog";
+const servURL = "http://10.140.189.199:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
 export default class CameraScreen extends Component {
   state = {
@@ -28,7 +28,8 @@ export default class CameraScreen extends Component {
     indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: false
+    showScanInfoScreen: true,
+    categoryColors: []
   };
 
   componentDidMount = async () => {
@@ -50,6 +51,10 @@ export default class CameraScreen extends Component {
     }, 800);
   };
 
+  toggleResult = (on) => {
+    this.setState({showScanInfoScreen:on});
+  }
+
   take = async cam => {
     //console.log(cam);
     const options = { quality: 1, base64: true, exif: true };
@@ -60,7 +65,7 @@ export default class CameraScreen extends Component {
     console.log("done");
     //console.log(data.base64);
     console.log("trying sending to server");
-    fetch(lservURL, {
+    fetch(servURL, {
       method: "POST",
       Accept: "application/json",
       headers: {
@@ -134,8 +139,8 @@ export default class CameraScreen extends Component {
               style={{ marginTop: 200 }}
             />
           </Modal>
-          <Modal visible={this.state.showScanInfoScreen}>
-            <ScanInfoScreen />
+          <Modal visible={this.state.showScanInfoScreen} onRequestClose={() => this.toggleResult(false)}>
+            <ScanInfoScreen toggle={()=>this.toggleResult(false)}/>
           </Modal>
         </View>
         <StatisticsScreen />
