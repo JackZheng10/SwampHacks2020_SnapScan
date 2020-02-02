@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, SafeAreaView, TextInput, ScrollView } from "react-native";
 import { styles } from "./styles.js";
-import { Header, Icon, ListItem, Badge } from "react-native-elements";
+import { Header, Icon, ListItem, Badge, Button } from "react-native-elements";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class ScanInfoScreen extends React.Component {
@@ -17,13 +17,48 @@ class ScanInfoScreen extends React.Component {
       avatar_url:
         "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
       subtitle: "Vice Chairman"
-    }
-  ];
-
-  users = [
+    },
     {
-      name: "brynn",
-      avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
+    },
+    {
+      name: "Chris Jackson",
+      avatar_url:
+        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      subtitle: "Vice Chairman"
     }
   ];
 
@@ -41,7 +76,6 @@ class ScanInfoScreen extends React.Component {
         <View
           style={{
             flexDirection: "row",
-
             alignItems: "center",
             margin: 10,
             justifyContent: "space-evenly"
@@ -97,13 +131,30 @@ class ScanInfoScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <ListItem
-          style={({ flexDirection: "row" }, { left: 0 })}
-          topDivider={true}
-          title="Total price: "
-        >
-          <Text>aahhh</Text>
-        </ListItem>
+        <SafeAreaView style={styles.confirmDenyBar}>
+          <View style={{ marginTop: 20 }}>
+            <Text style={{ width: 270 }}>
+              Total price: change this font bruh
+            </Text>
+          </View>
+
+          <View style={styles.confirmDeny}>
+            <Icon
+              reverse
+              raised
+              name="cancel"
+              type="material-community"
+              color="#F56B5E"
+            />
+            <Icon
+              reverse
+              raised
+              name="check"
+              type="material-community"
+              color="#3FC272"
+            />
+          </View>
+        </SafeAreaView>
       </SafeAreaView>
     );
   }
