@@ -29,7 +29,7 @@ export default class CameraScreen extends Component {
     indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: true,
+    showScanInfoScreen: false,
     categoryColors: [],
     itemsList: [],
     total: 0

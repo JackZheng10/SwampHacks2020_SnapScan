@@ -125,8 +125,8 @@ class ScanInfoScreen extends React.Component {
 
         <SafeAreaView style={styles.confirmDenyBar}>
           <View style={{ marginTop: 20 }}>
-            <Text style={{ width: 270 }}>
-              Total price: {16.51}
+            <Text style={{ width: 270, fontSize: 20, paddingLeft: 10 }}>
+              Total Price: {this.props.total}
             </Text>
           </View>
 

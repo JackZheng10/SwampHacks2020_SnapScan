@@ -1,33 +1,28 @@
 import React from "react";
 import {
-  Text,
   View,
   SafeAreaView,
-  TextInput,
-  ScrollView,
   Dimensions
 } from "react-native";
 import { styles } from "./styles.js";
-import { Header, Icon, ListItem, Badge } from "react-native-elements";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Header} from "react-native-elements";
 import {
   LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
+  PieChart
 } from "react-native-chart-kit";
 import { Dropdown } from 'react-native-material-dropdown';
+
+const pieChartConfig = {
+  color: (opacity = 1) => [`#70C4FF`],
+  };
 
 const chartConfig = {
   backgroundGradientFrom: "white",
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `#70C4FF`,
+  backgroundGradientToOpacity: 0,
+  color: (opacity = 1) => ['white'],
   strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5
 };
 const data = [
   {
@@ -67,14 +62,16 @@ const data = [
   }
 ];
 
-const lineData = {
-  labels: ["January", "February", "March", "April", "May", "June"],
+
+const lineData = { 
+  labels: ['Sept', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'], 
   datasets: [
-    {
-      data: [1,2,3,4,5,6]
-    }
-  ]
+    { data: [ 60, 52, 55, 48, 50, 40 ], color: (opacity = 1) => `#70C4FF`},
+    { data: [ 50, 50, 50, 50, 50, 50 ], color: (opacity = 1) => `#3FC272`}
+  ],
+  legend: ['test', 'test2']
 };
+
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class StatisticsScreen extends React.Component {
@@ -108,7 +105,7 @@ class StatisticsScreen extends React.Component {
           data={data}
           width={Dimensions.get("window").width}
           height={220}
-          chartConfig={chartConfig}
+          chartConfig={pieChartConfig}
           accessor="spent"
           backgroundColor="transparent"
           paddingLeft="2"
@@ -117,10 +114,10 @@ class StatisticsScreen extends React.Component {
         />
 
         <LineChart
-          data={lineData}
           width={Dimensions.get("window").width - 25}
           height={220}
           chartConfig={chartConfig}
+          data={lineData}
           backgroundColor="transparent"
         />
       </SafeAreaView>
