@@ -25,43 +25,6 @@ const chartConfig = {
   strokeWidth: 2, // optional, default 3
   
 };
-const data = [
-  {
-    name: "Restaurants",
-    spent: 52,
-    color: "#70C4FF",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Groceries",
-    spent: 48,
-    color: "#3FC272",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Miscellaneous",
-    spent: 25,
-    color: "#F5E184",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Clothing",
-    spent: 15,
-    color: "#F56B5E",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  },
-  {
-    name: "Entertainment",
-    spent: 32,
-    color: "grey",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-  }
-];
 
 
 const lineData = { 
@@ -76,6 +39,68 @@ const lineData = {
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class StatisticsScreen extends React.Component {
+  state = {
+    data : [
+      {
+        name: "Restaurants",
+        spent: 52,
+        color: "#70C4FF",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Groceries",
+        spent: 48,
+        color: "#3FC272",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Miscellaneous",
+        spent: 25,
+        color: "#F5E184",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Clothing",
+        spent: 15,
+        color: "#F56B5E",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Entertainment",
+        spent: 32,
+        color: "grey",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      }
+    ]
+  }
+
+  buildData = () => {
+    const names = ["Restaurants", "Groceries", "Miscellaneous", "Clothing", "Entertainment"]
+    const colors = ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E", "grey"]
+    var d = [];
+    this.props.list.map((l, i)=> {
+      var sp = 0;
+      l.items.map((l2, i2)=> {
+        if(l2.category == (i+1))
+          sp = sp + l2.price;
+      });
+      d.push({
+        name: names[i],
+        spent: parseInt(sp),
+        color: colors[i],
+        legendFontColor: "#7f7f7f",
+        legendFontSize: 15
+      })
+    });
+    console.log(d);
+    this.setState({data:d});
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.slideBody}>
@@ -89,7 +114,7 @@ class StatisticsScreen extends React.Component {
           containerStyle={styles.scanInfoHeader}
         />
         <View style={{marginLeft:10, marginRight: 10}}>
-        <Dropdown
+        <Dropdown onChangeText={()=>{this.buildData();}}
         label='Period'
         data={[{
           value: 'Current Month',
@@ -100,10 +125,11 @@ class StatisticsScreen extends React.Component {
         }, {
           value: '12 Month Period'
         }]}
+
       />
        </View>
         <PieChart
-          data={data}
+          data={this.state.data}
           width={Dimensions.get("window").width}
           height={220}
           chartConfig={pieChartConfig}

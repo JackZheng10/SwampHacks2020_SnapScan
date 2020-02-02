@@ -175,7 +175,7 @@ export default class CameraScreen extends Component {
             <ScanInfoScreen toggle={()=>this.toggleResult(false)} save={(list, total)=>this.addReceipt(list, total)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
           </Modal>
         </View>
-        <StatisticsScreen />
+        <StatisticsScreen list={this.state.receiptList}/>
       </Swiper>
     );
   }
