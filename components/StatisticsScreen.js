@@ -84,7 +84,7 @@ class StatisticsScreen extends React.Component {
         <Header
           placement="center"
           centerComponent={{
-            text: "Summary",
+            text: "Statistics",
             style: styles.scanInfoText
           }}
           containerStyle={styles.scanInfoHeader}
@@ -96,13 +96,13 @@ class StatisticsScreen extends React.Component {
           chartConfig={chartConfig}
           accessor="spent"
           backgroundColor="transparent"
-          paddingLeft="15"
+          paddingLeft="2"
           absolute={false}
         />
 
         <LineChart
           data={lineData}
-          width={Dimensions.get("window").width}
+          width={Dimensions.get("window").width - 25}
           height={220}
           chartConfig={chartConfig}
           backgroundColor="transparent"

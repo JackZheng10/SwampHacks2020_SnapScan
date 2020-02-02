@@ -15,6 +15,7 @@ import Test from "./components/test.js";
 import { styles } from "./components/styles.js";
 import ScanInfoScreen from "./components/ScanInfoScreen.js";
 import StatisticsScreen from "./components/StatisticsScreen.js";
+import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
 
 const servURL = "http://10.140.189.199:3001/blog";
@@ -72,7 +73,7 @@ export default class CameraScreen extends Component {
           console.log(content);
         });
         this.setState({ showLoading: false });
-        this.setState({showScanInfoScreen: true});
+        this.setState({ showScanInfoScreen: true });
       },
       reason => {
         console.log(reason);
@@ -98,9 +99,7 @@ export default class CameraScreen extends Component {
         showsPagination={false}
         index={1}
       >
-        <View key="0" style={styles.slideBody}>
-          <Text>test</Text>
-        </View>
+        <PurchaseHistory />
 
         <View key="1" style={styles.slideBody}>
           <Camera
