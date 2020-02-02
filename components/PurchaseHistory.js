@@ -5,7 +5,9 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
-  Dimensions
+  Dimensions,
+  Modal,
+  ActivityIndicator
 } from "react-native";
 import { styles } from "./styles.js";
 import { Header, Icon, ListItem, Badge } from "react-native-elements";
@@ -110,14 +112,21 @@ let list = [
   }
 ];
 
-const onPress = key => {
-  console.log("Item with ID: " + key + "was pressed");
-};
-
 //"#3FC272", "#F5E184", "#F56B5E",
 class PurchaseHistory extends React.Component {
   state = {
-    purchaseList: []
+    purchaseList: list, //when adding to here, INSERT AT BEGINNING
+    currentIndex: -1,
+    showList: false,
+    currentPurchasedItems: []
+  };
+
+  onPress = index => {
+    this.setState({
+      currentIndex: index,
+      showList: true,
+      currentPurchasedItems: this.state.purchaseList[index]
+    });
   };
 
   render() {
@@ -134,17 +143,32 @@ class PurchaseHistory extends React.Component {
         />
         <ScrollView>
           <View>
-            {list.map((l, i) => (
+            {this.state.purchaseList.map((
+              l,
+              i //i = index, l = item
+            ) => (
               <ListItem
                 key={i}
-                leftAvatar={{ source: { uri: l.avatar_url } }}
-                title={l.name}
-                subtitle={l.subtitle}
+                title={"Price"}
+                subtitle={"Date"}
                 bottomDivider
-                onPress={() => onPress(i)}
+                onPress={() => this.onPress(i)}
               />
             ))}
           </View>
+          <Modal
+            visible={this.state.showList}
+            onRequestClose={() => (this.state.showList = false)}
+          >
+            <View>
+              {this.state.currentPurchasedItems.map((
+                l,
+                i //i = index, l = item
+              ) => (
+                <ListItem title={"Name"} subtitle={"Price"} bottomDivider />
+              ))}
+            </View>
+          </Modal>
         </ScrollView>
       </SafeAreaView>
     );

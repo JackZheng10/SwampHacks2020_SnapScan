@@ -18,7 +18,7 @@ import StatisticsScreen from "./components/StatisticsScreen.js";
 import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
 
-const servURL = "http://10.140.189.199:3001/blog";
+const servURL = "http://10.140.189.199:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
 export default class CameraScreen extends Component {
   state = {
