@@ -15,13 +15,15 @@ class PurchaseHistory extends React.Component {
   state = {
     popup: false,
     list: [],
-    total: 0
+    total: 0,
+    date:""
   };
 
 
   showReceipt = (data) => {
     this.setState({list:data.items});
     this.setState({total:data.total});
+    this.setState({date:data.date});
     this.setState({popup:true});
   };
 
