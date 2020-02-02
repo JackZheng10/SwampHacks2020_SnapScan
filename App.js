@@ -17,7 +17,7 @@ import ScanInfoScreen from './components/ScanInfoScreen.js';
 import StatisticsScreen from './components/StatisticsScreen.js';
 
 const servURL = "http://10.140.189.199:3001/blog";
-const lservURL = "http://10.140.187.64:5000/blog";
+const lservURL = "http://10.140.187.64:3000/blog";
 export default class CameraScreen extends Component {
   state = {
     permission: null,
@@ -59,7 +59,7 @@ export default class CameraScreen extends Component {
     console.log("done");
     //console.log(data.base64);
     console.log("trying sending to server");
-    fetch(servURL, {
+    fetch(lservURL, {
       method: "POST",
       Accept: "application/json",
       headers: {
