@@ -28,9 +28,8 @@ class StatisticsScreen extends React.Component {
   ];
 
   render() {
-
     return (
-      <SafeAreaView style={styles.slideBody}>
+      <SafeAreaView style={({ flex: 1 }, { marginTop: 20 })}>
         <Header
           placement="center"
           centerComponent={{

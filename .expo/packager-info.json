@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://f4-7m3.holeeman.swamphacks2020-snapscan.exp.direct",
-  "packagerNgrokUrl": "https://packager.f4-7m3.holeeman.swamphacks2020-snapscan.exp.direct",
-  "ngrokPid": 30971,
-  "devToolsPort": 19002,
-  "packagerPort": 19006,
-  "packagerPid": 30952
+  "expoServerPort": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "devToolsPort": 19007,
+  "packagerPort": null,
+  "packagerPid": null
 }
