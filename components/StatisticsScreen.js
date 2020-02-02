@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, SafeAreaView, TextInput, ScrollView, Dimensions } from "react-native";
+import {
+  Text,
+  View,
+  SafeAreaView,
+  TextInput,
+  ScrollView,
+  Dimensions
+} from "react-native";
 import { styles } from "./styles.js";
 import { Header, Icon, ListItem, Badge } from "react-native-elements";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -19,7 +26,7 @@ const chartConfig = {
   backgroundGradientToOpacity: 0.5,
   color: (opacity = 1) => `#70C4FF`,
   strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
+  barPercentage: 0.5
 };
 const data = [
   {
@@ -56,10 +63,10 @@ const data = [
     color: "grey",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
-  },
- ];
+  }
+];
 
- const lineData = {
+const lineData = {
   labels: ["January", "February", "March", "April", "May", "June"],
   datasets: [
     {
@@ -70,16 +77,14 @@ const data = [
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class StatisticsScreen extends React.Component {
-
   render() {
-
     return (
       <SafeAreaView style={styles.slideBody}>
-        <View style={{backgroundColor:"black", height: 30}}></View>
+        <View style={{ backgroundColor: "black", height: 30 }}></View>
         <Header
           placement="center"
           centerComponent={{
-            text: "Summary",
+            text: "Statistics",
             style: styles.scanInfoText
           }}
           containerStyle={styles.scanInfoHeader}
@@ -91,17 +96,18 @@ class StatisticsScreen extends React.Component {
           chartConfig={chartConfig}
           accessor="spent"
           backgroundColor="transparent"
-          paddingLeft="15"
-          absolute={false}/>
+          paddingLeft="2"
+          absolute={false}
+        />
 
         <LineChart
           data={lineData}
-          width={Dimensions.get("window").width}
+          width={Dimensions.get("window").width - 25}
           height={220}
           chartConfig={chartConfig}
           backgroundColor="transparent"
         />
-</SafeAreaView>
+      </SafeAreaView>
     );
   }
 }

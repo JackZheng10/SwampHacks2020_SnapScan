@@ -63,7 +63,6 @@ class ScanInfoScreen extends React.Component {
   ];
 
   render() {
-
     return (
       <SafeAreaView style={styles.slideBody}>
         <Header
