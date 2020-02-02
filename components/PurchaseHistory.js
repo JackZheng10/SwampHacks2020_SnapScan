@@ -28,135 +28,97 @@ const chartConfig = {
   strokeWidth: 2, // optional, default 3
   barPercentage: 0.5
 };
-const data = [
+
+let list = [
   {
-    name: "Restaurants",
-    spent: 50,
-    color: "#70C4FF",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    name: "Amy Farha",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+    subtitle: "Vice President"
   },
   {
-    name: "Groceries",
-    spent: 100,
-    color: "#3FC272",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
   },
   {
-    name: "Miscellaneous",
-    spent: 100,
-    color: "#F5E184",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
   },
   {
-    name: "Clothing",
-    spent: 100,
-    color: "#F56B5E",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
   },
   {
-    name: "Entertainment",
-    spent: 100,
-    color: "grey",
-    legendFontColor: "#7F7F7F",
-    legendFontSize: 15
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
+  },
+  {
+    name: "Chris Jackson",
+    avatar_url:
+      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+    subtitle: "Vice Chairman"
   }
 ];
 
-const lineData = {
-  labels: ["January", "February", "March", "April", "May", "June"],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43]
-    }
-  ]
+const onPress = key => {
+  console.log("Item with ID: " + key + "was pressed");
 };
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class PurchaseHistory extends React.Component {
-  list = [
-    {
-      name: "Amy Farha",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-      subtitle: "Vice President"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    },
-    {
-      name: "Chris Jackson",
-      avatar_url:
-        "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      subtitle: "Vice Chairman"
-    }
-  ];
+  state = {
+    purchaseList: []
+  };
 
   render() {
     return (
@@ -172,13 +134,14 @@ class PurchaseHistory extends React.Component {
         />
         <ScrollView>
           <View>
-            {this.list.map((l, i) => (
+            {list.map((l, i) => (
               <ListItem
                 key={i}
                 leftAvatar={{ source: { uri: l.avatar_url } }}
                 title={l.name}
                 subtitle={l.subtitle}
                 bottomDivider
+                onPress={() => onPress(i)}
               />
             ))}
           </View>
