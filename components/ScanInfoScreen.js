@@ -1,14 +1,14 @@
 import React from "react";
 import { Text, View, SafeAreaView, TextInput, ScrollView } from "react-native";
 import { styles } from "./styles.js";
-import { Header } from "react-native-elements";
+import { Header, Button } from "react-native-elements";
 
 var testData= [{name:"", category:"", price:""}, ]
-  class Test extends React.Component {
+  class ScanInfoScreen extends React.Component {
 
    render() {
     return (
-      <View>
+      <SafeAreaView style={styles.slideBody}>
         <Header
           placement="center"
           centerComponent={{
@@ -17,12 +17,23 @@ var testData= [{name:"", category:"", price:""}, ]
           }}
           containerStyle={styles.scanInfoHeader}
         />
-        <ScrollView>
-          <Text>AHSHDASHDASDISAIAIAHSHDASDISADISAIAIAHSHDASDISAIAI</Text>
-        </ScrollView>
-      </View>
+
+        <View
+          style={{
+            flexDirection: "row"
+          }}
+        >
+          <Button title="test" type="outline" style={styles.scanInfoTypes} />
+          <Button title="test2" type="outline" style={styles.scanInfoTypes} />
+          <Button title="test3" type="outline" style={styles.scanInfoTypes} />
+          <Button title="test4" type="outline" style={styles.scanInfoTypes} />
+          <Button title="test5" type="outline" style={styles.scanInfoTypes} />
+        </View>
+
+        <ScrollView></ScrollView>
+      </SafeAreaView>
     );
   }
 }
 
-export default Test;
+export default ScanInfoScreen;
