@@ -10,7 +10,7 @@ import {
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
-import Test from "./components/test.js";
+//import History from "./components/History.js/index.js";
 
 import { styles } from "./components/styles.js";
 import ScanInfoScreen from "./components/ScanInfoScreen.js";
@@ -59,7 +59,7 @@ export default class CameraScreen extends Component {
     console.log("done");
     //console.log(data.base64);
     console.log("trying sending to server");
-    fetch(servURL, {
+    fetch(lservURL, {
       method: "POST",
       Accept: "application/json",
       headers: {
