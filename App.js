@@ -34,28 +34,7 @@ export default class CameraScreen extends Component {
     categoryColors: [],
     itemsList: [],
     total: 0,
-    receiptList: [
-      {
-        "items": [
-          {
-            "category": 2,
-            "name": "WW FIVE GR BR",
-            "price": "1.90",
-          },
-          {
-            "category": 4,
-            "name": "SS SAUTE PAN",
-            "price": "10.99",
-          },
-          {
-            "category": 3,
-            "name": "PUBLIX BRAN FLAKES",
-            "price": "2.85",
-          },
-        ],
-        "total": 16.51,
-      },
-    ]
+    receiptList: []
   };
 
   addReceipt = (itemsList, totalPrice) => {
@@ -63,7 +42,7 @@ export default class CameraScreen extends Component {
     newReceiptList.push({
       items: itemsList,
       total: totalPrice,
-      date: new Date()
+      date: (new Date()).toString()
     });
     console.log(newReceiptList);
     this.setState({receiptList:newReceiptList});
@@ -76,7 +55,7 @@ export default class CameraScreen extends Component {
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
-    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/data.txt").then((data)=>{const d =JSON.parse(data);}, (reason)=>{})
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/data.txt").then((data)=>{const d = JSON.parse(data); this.setState({receiptList:d})}, (reason)=>{});
     setTimeout(() => {
       this.changeColor();
     }, 800);

@@ -95,7 +95,7 @@ class ScanInfoScreen extends React.Component {
         <ScrollView>
           <View>
             {this.props.itemList.map((l, i) => (
-              <View style={{height: 60, flexDirection: "row"}}>
+              <View style={{height: 60, flexDirection: "row"}} key={i}>
                   <TouchableOpacity style={{backgroundColor: this.state.ccolor[l.category], height: 60, flex:1}} onPressOut={
                       ()=>{
                           const list = this.props.itemList;

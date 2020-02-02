@@ -64,7 +64,7 @@ class PurchaseHistory extends React.Component {
           borderRadius: 10,}}>
             <SafeAreaView style={{flex: 1, flexDirection: "column"}}>
                 <Text style={{textAlign:"center", marginTop: 20, fontSize: 20}}>Receipt</Text>
-                <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Date: </Text>
+          <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Date:{this.state.date}</Text>
               <ScrollView>
                 {this.state.list.map((l,i) => (
                   <ListItem
