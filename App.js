@@ -1,11 +1,18 @@
 import React, { useState, useEffect, Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Modal} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  Modal
+} from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
 import Test from "./components/test.js";
-import {styles} from './components/styles.js';
-import ScanInfoScreen from './components/ScanInfoScreen.js';
+import { styles } from "./components/styles.js";
+import ScanInfoScreen from "./components/ScanInfoScreen.js";
 
 const servURL = "http://10.136.104.219:3001/blog";
 const lservURL = "http://10.140.187.64:5000/blog";
@@ -14,10 +21,10 @@ export default class CameraScreen extends Component {
     permission: null,
     camera: null,
     listOfThings: "test",
-    indicatorColors: ["#70C4FF","#3FC272","#F5E184","#F56B5E"],
+    indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: true,
+    showScanInfoScreen: false
   };
 
   componentDidMount = async () => {
@@ -25,23 +32,25 @@ export default class CameraScreen extends Component {
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
-    setTimeout(()=>{this.changeColor()}, 800);
-  };
-
-  changeColor = async()=> {
-    this.setState({indicatorIndex:this.state.indicatorIndex + 1});
-      if(this.state.indicatorIndex > this.state.indicatorColors.length)
-        this.setState({indicatorIndex:0});
-    setTimeout(()=>{
+    setTimeout(() => {
       this.changeColor();
     }, 800);
-  }
+  };
 
-  take = async (cam) => {
+  changeColor = async () => {
+    this.setState({ indicatorIndex: this.state.indicatorIndex + 1 });
+    if (this.state.indicatorIndex > this.state.indicatorColors.length)
+      this.setState({ indicatorIndex: 0 });
+    setTimeout(() => {
+      this.changeColor();
+    }, 800);
+  };
+
+  take = async cam => {
     //console.log(cam);
     const options = { quality: 1, base64: true, exif: true };
     console.log("trying taking picture");
-    this.setState({showLoading:true});
+    this.setState({ showLoading: true });
 
     const data = await cam.takePictureAsync(options);
     console.log("done");
@@ -56,15 +65,17 @@ export default class CameraScreen extends Component {
       body: JSON.stringify(data)
     }).then(
       res => {
-        res.text().then((content)=>{console.log(content)});
-        this.setState({showLoading:false});
+        res.text().then(content => {
+          console.log(content);
+        });
+        this.setState({ showLoading: false });
       },
       reason => {
         console.log(reason);
-        this.setState({showLoading:false});
+        this.setState({ showLoading: false });
       }
     );
-    this.setState({listOfThings:"change"});
+    this.setState({ listOfThings: "change" });
   };
 
   render() {
@@ -108,15 +119,22 @@ export default class CameraScreen extends Component {
               <MaterialIcons name="camera" size={40} color="white" />
             </TouchableOpacity>
           </Camera>
-          <Modal transparent={true} style={{flex:1, justifyContent: 'center', alignItems: 'center'}} visible={this.state.showLoading}>
-            <ActivityIndicator size={"large"} color={this.state.indicatorColors[this.state.indicatorIndex]} style={{marginTop: 200}}/>
+          <Modal
+            transparent={true}
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+            visible={this.state.showLoading}
+          >
+            <ActivityIndicator
+              size={"large"}
+              color={this.state.indicatorColors[this.state.indicatorIndex]}
+              style={{ marginTop: 200 }}
+            />
           </Modal>
           <Modal visible={this.state.showScanInfoScreen}>
-            <ScanInfoScreen/>
+            <ScanInfoScreen />
           </Modal>
         </View>
-        <Test test={this.state.listOfThings}/>
-        
+        <Test test={this.state.listOfThings} />
       </ViewPager>
     );
   }

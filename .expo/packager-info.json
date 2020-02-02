@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://f4-7m3.anonymous.swamphacks2020-snapscan.exp.direct",
   "packagerNgrokUrl": "https://packager.f4-7m3.anonymous.swamphacks2020-snapscan.exp.direct",
-  "ngrokPid": 7588,
+  "ngrokPid": 24668,
   "devToolsPort": 19006,
   "packagerPort": 19001,
-  "packagerPid": 140
+  "packagerPid": 27196
 }
