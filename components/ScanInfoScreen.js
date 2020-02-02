@@ -63,6 +63,7 @@ class ScanInfoScreen extends React.Component {
   ];
 
   render() {
+
     return (
       <SafeAreaView style={styles.slideBody}>
         <Header
@@ -73,6 +74,7 @@ class ScanInfoScreen extends React.Component {
           }}
           containerStyle={styles.scanInfoHeader}
         />
+
         <View
           style={{
             flexDirection: "row",

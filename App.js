@@ -11,10 +11,12 @@ import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
 import Test from "./components/test.js";
+
 import { styles } from "./components/styles.js";
 import ScanInfoScreen from "./components/ScanInfoScreen.js";
+import StatisticsScreen from "./components/StatisticsScreen.js";
 
-const servURL = "http://10.136.104.219:3001/blog";
+const servURL = "http://10.140.189.199:3001/blog";
 const lservURL = "http://10.140.187.64:5000/blog";
 export default class CameraScreen extends Component {
   state = {
@@ -56,7 +58,7 @@ export default class CameraScreen extends Component {
     console.log("done");
     //console.log(data.base64);
     console.log("trying sending to server");
-    fetch(lservURL, {
+    fetch(servURL, {
       method: "POST",
       Accept: "application/json",
       headers: {
@@ -134,7 +136,7 @@ export default class CameraScreen extends Component {
             <ScanInfoScreen />
           </Modal>
         </View>
-        <Test test={this.state.listOfThings} />
+        <StatisticsScreen />
       </ViewPager>
     );
   }
