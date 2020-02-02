@@ -18,6 +18,7 @@ import ScanInfoScreen from "./components/ScanInfoScreen.js";
 import StatisticsScreen from "./components/StatisticsScreen.js";
 import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
+import * as FileSystem from "expo-file-system"
 
 const servURL = "http://10.140.189.199:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
@@ -61,10 +62,12 @@ export default class CameraScreen extends Component {
     const newReceiptList = this.state.receiptList;
     newReceiptList.push({
       items: itemsList,
-      total: totalPrice
+      total: totalPrice,
+      date: new Date()
     });
     console.log(newReceiptList);
     this.setState({receiptList:newReceiptList});
+    FileSystem.writeAsStringAsync(FileSystem.documentDirectory+"/data.txt", JSON.stringify(this.state.receiptList)).then(()=>{},(reason)=>{console.log(reason)});
     this.toggleResult(false);
   }
 
@@ -73,6 +76,7 @@ export default class CameraScreen extends Component {
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/data.txt").then((data)=>{const d =JSON.parse(data);}, (reason)=>{})
     setTimeout(() => {
       this.changeColor();
     }, 800);

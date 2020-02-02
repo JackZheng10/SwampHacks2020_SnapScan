@@ -13,13 +13,15 @@ import { Header, Icon, ListItem, Badge } from "react-native-elements";
 //"#3FC272", "#F5E184", "#F56B5E",
 class PurchaseHistory extends React.Component {
   state = {
-    popup: true,
+    popup: false,
     list: [],
     total: 0
   };
 
 
-  onPress = key => {
+  showReceipt = (data) => {
+    this.setState({list:data.items});
+    this.setState({total:data.total});
     this.setState({popup:true});
   };
 
@@ -40,10 +42,10 @@ class PurchaseHistory extends React.Component {
             {this.props.list.map((l,i) => (
               <ListItem
               key={i}
-              title={i}
-              subtitle={"total: "+i.total}
+              title={l.date}
+              subtitle={"total: "+l.total}
               bottomDivider
-              onPress={() => this.onPress(i)}
+              onPress={() => this.showReceipt(l)}
             />
             ))}
           </View>
@@ -61,10 +63,17 @@ class PurchaseHistory extends React.Component {
           backgroundColor: "#FFF",
           borderRadius: 10,}}>
             <SafeAreaView style={{flex: 1, flexDirection: "column"}}>
-                <Text style={{textAlign:"center", marginTop: 20}}>Receipt</Text>
+                <Text style={{textAlign:"center", marginTop: 20, fontSize: 20}}>Receipt</Text>
                 <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Date: </Text>
               <ScrollView>
-              
+                {this.state.list.map((l,i) => (
+                  <ListItem
+                    key={i}
+                    title={l.name}
+                    subtitle={l.price}
+                    bottomDivider
+                  />
+                ))}
               </ScrollView>
               <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Total: {this.state.total}</Text>
               <Text></Text>
