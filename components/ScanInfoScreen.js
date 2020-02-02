@@ -21,22 +21,10 @@ class ScanInfoScreen extends React.Component {
   //res = {"response":{"100% WW FIVE GR BR":1.9,"3\" NS SS SAUTE PAN":10.99,"PUBLIX BRAN FLAKES":2.85,"total":16.51}};
   //  data = res.response;
   state = {
-      ccolor:["white","#70C4FF", "#F56B5E", "#F5E184", "#3FC272","grey"],
-      icolor:["#F6F5F1", "#93D4FF", "#F5A497", "#F5EFAC", "#84C295", "#F6F5F1"],
-      currentCategory: 1
+    ccolor:["white","#70C4FF", "#F56B5E", "#F5E184", "#3FC272","grey"],
+    icolor:["#F6F5F1", "#93D4FF", "#F5A497", "#F5EFAC", "#84C295", "#F6F5F1"],
+    currentCategory: 1
   }
-  list = [
-    {
-      name:"100% WW FIVE GR BR",
-      price:1.9,
-      category:5
-    },
-    {
-        name:"NS SS SAUTE PAN",
-        price:10.99,
-        category:5
-    }
-  ];
 
   render() {
     return (
@@ -106,11 +94,30 @@ class ScanInfoScreen extends React.Component {
         </View>
         <ScrollView>
           <View>
-            {this.list.map((l, i) => (
+            {this.props.itemList.map((l, i) => (
               <View style={{height: 60, flexDirection: "row"}}>
-                  <TouchableOpacity style={{backgroundColor: this.state.ccolor[l.category], height: 60, flex:1}} onPressOut={()=>{l.category=this.state.currentCategory}}></TouchableOpacity>
-                  <TextInput placeholder="enter" value={l.name} style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
-                  <TextInput placeholder="enter" value={l.price.toString()} style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
+                  <TouchableOpacity style={{backgroundColor: this.state.ccolor[l.category], height: 60, flex:1}} onPressOut={
+                      ()=>{
+                          const list = this.props.itemList;
+                          list[i].category=this.state.currentCategory;
+                          this.props.cl(list);
+                        }
+                      }></TouchableOpacity>
+                  <TextInput placeholder="enter" value={l.name} onChangeText={
+                      (val)=>{
+                          const list = this.props.itemList;
+                          list[i].name=val;
+                          this.props.cl(list);
+                          //console.log(val);
+                        }
+                      } style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
+                  <TextInput placeholder="enter" value={l.price.toString()} onChangeText={
+                      (val)=>{
+                        const list = this.props.itemList;
+                        list[i].price=val;
+                        this.props.cl(list);
+                      }
+                    } style={{flex: 5, backgroundColor: this.state.icolor[l.category], paddingLeft: 10}}/>
               </View>
             ))}
           </View>
@@ -119,7 +126,7 @@ class ScanInfoScreen extends React.Component {
         <SafeAreaView style={styles.confirmDenyBar}>
           <View style={{ marginTop: 20 }}>
             <Text style={{ width: 270 }}>
-              Total price: change this font bruh
+              Total price: {16.51}
             </Text>
           </View>
 

@@ -18,6 +18,7 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import { Dropdown } from 'react-native-material-dropdown';
 
 const chartConfig = {
   backgroundGradientFrom: "white",
@@ -31,35 +32,35 @@ const chartConfig = {
 const data = [
   {
     name: "Restaurants",
-    spent: 50,
+    spent: 52,
     color: "#70C4FF",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Groceries",
-    spent: 100,
+    spent: 48,
     color: "#3FC272",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Miscellaneous",
-    spent: 100,
+    spent: 25,
     color: "#F5E184",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Clothing",
-    spent: 100,
+    spent: 15,
     color: "#F56B5E",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
   },
   {
     name: "Entertainment",
-    spent: 100,
+    spent: 32,
     color: "grey",
     legendFontColor: "#7F7F7F",
     legendFontSize: 15
@@ -89,6 +90,20 @@ class StatisticsScreen extends React.Component {
           }}
           containerStyle={styles.scanInfoHeader}
         />
+        <View style={{marginLeft:10, marginRight: 10}}>
+        <Dropdown
+        label='Period'
+        data={[{
+          value: 'Current Month',
+        }, {
+          value: 'Last Month',
+        }, {
+          value: '6 Month Period', 
+        }, {
+          value: '12 Month Period'
+        }]}
+      />
+       </View>
         <PieChart
           data={data}
           width={Dimensions.get("window").width}
@@ -97,7 +112,8 @@ class StatisticsScreen extends React.Component {
           accessor="spent"
           backgroundColor="transparent"
           paddingLeft="2"
-          absolute={false}
+          absolute={true}
+          style={{marginBottom:50, marginTop:30}}
         />
 
         <LineChart

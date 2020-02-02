@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
-  Modal
+  Modal,
+  Alert
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -29,7 +30,9 @@ export default class CameraScreen extends Component {
     indicatorIndex: 0,
     showLoading: false,
     showScanInfoScreen: true,
-    categoryColors: []
+    categoryColors: [],
+    itemsList: [],
+    total: 0
   };
 
   componentDidMount = async () => {
@@ -50,6 +53,10 @@ export default class CameraScreen extends Component {
       this.changeColor();
     }, 800);
   };
+
+  changeItemList = (itemList) => {
+    this.setState({itemsList : itemList});
+  }
 
   toggleResult = (on) => {
     this.setState({showScanInfoScreen:on});
@@ -74,11 +81,17 @@ export default class CameraScreen extends Component {
       body: JSON.stringify(data)
     }).then(
       res => {
-        res.text().then(content => {
+        res.json().then(content => {
           console.log(content);
+          if(content.response == "ERROR")
+            Alert.alert("We did not reconize receipt!");
+          else{
+          this.setState({itemsList: content.response.items});
+          this.setState({total: content.response.total});
+          this.setState({ showScanInfoScreen: true });
+          }
         });
         this.setState({ showLoading: false });
-        this.setState({ showScanInfoScreen: true });
       },
       reason => {
         console.log(reason);
@@ -140,7 +153,7 @@ export default class CameraScreen extends Component {
             />
           </Modal>
           <Modal visible={this.state.showScanInfoScreen} onRequestClose={() => this.toggleResult(false)}>
-            <ScanInfoScreen toggle={()=>this.toggleResult(false)}/>
+            <ScanInfoScreen toggle={()=>this.toggleResult(false)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
           </Modal>
         </View>
         <StatisticsScreen />

@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://5d-5gb.holeeman.swamphacks2020-snapscan.exp.direct",
   "packagerNgrokUrl": "https://packager.5d-5gb.holeeman.swamphacks2020-snapscan.exp.direct",
-  "ngrokPid": 38339,
+  "ngrokPid": 40539,
   "devToolsPort": 19002,
   "packagerPort": 19007,
-  "packagerPid": 38328
+  "packagerPid": 40528
 }
