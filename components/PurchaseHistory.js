@@ -6,127 +6,23 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
-  Modal,
-  ActivityIndicator
+  Modal
 } from "react-native";
 import { styles } from "./styles.js";
 import { Header, Icon, ListItem, Badge } from "react-native-elements";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
-
-const chartConfig = {
-  backgroundGradientFrom: "white",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `#70C4FF`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5
-};
-
-let list = [
-  {
-    name: "Amy Farha",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subtitle: "Vice President"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  }
-];
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class PurchaseHistory extends React.Component {
   state = {
-    purchaseList: list, //when adding to here, INSERT AT BEGINNING
-    currentIndex: -1,
-    showList: false,
-    currentPurchasedItems: []
+    popup: false,
+    list: [],
+    total: 0
   };
 
-  onPress = index => {
-    this.setState({
-      currentIndex: index,
-      showList: true,
-      currentPurchasedItems: this.state.purchaseList[index]
-    });
+  showReceipt = data => {
+    this.setState({ list: data.items });
+    this.setState({ total: data.total });
+    this.setState({ popup: true });
   };
 
   render() {
@@ -143,16 +39,13 @@ class PurchaseHistory extends React.Component {
         />
         <ScrollView>
           <View>
-            {this.state.purchaseList.map((
-              l,
-              i //i = index, l = item
-            ) => (
+            {this.props.list.map((l, i) => (
               <ListItem
                 key={i}
-                title={"Price"}
-                subtitle={"Date"}
+                title={l.date}
+                subtitle={"total: " + l.total}
                 bottomDivider
-                onPress={() => this.onPress(i)}
+                onPress={() => this.showReceipt(l)}
               />
             ))}
           </View>
@@ -170,6 +63,62 @@ class PurchaseHistory extends React.Component {
             </View>
           </Modal>
         </ScrollView>
+        <Modal
+          visible={this.state.popup}
+          transparent={true}
+          onRequestClose={() => {
+            this.setState({ popup: false });
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              paddingTop: 50,
+              backgroundColor: "#55555588"
+            }}
+          >
+            <SafeAreaView
+              style={{
+                flex: 1,
+                marginVertical: 100,
+                marginHorizontal: 20,
+                padding: 10,
+                backgroundColor: "#FFF",
+                borderRadius: 10
+              }}
+            >
+              <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
+                <Text
+                  style={{ textAlign: "center", marginTop: 20, fontSize: 20 }}
+                >
+                  Receipt
+                </Text>
+                <Text
+                  style={{ textAlign: "right", marginTop: 20, marginRight: 10 }}
+                >
+                  Date:{" "}
+                </Text>
+                <ScrollView>
+                  {this.state.list.map((l, i) => (
+                    <ListItem
+                      key={i}
+                      title={l.name}
+                      subtitle={l.price}
+                      bottomDivider
+                    />
+                  ))}
+                </ScrollView>
+                <Text
+                  style={{ textAlign: "right", marginTop: 20, marginRight: 10 }}
+                >
+                  Total: {this.state.total}
+                </Text>
+                <Text></Text>
+              </SafeAreaView>
+            </SafeAreaView>
+          </View>
+        </Modal>
       </SafeAreaView>
     );
   }

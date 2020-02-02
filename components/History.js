@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, SafeAreaView, TextInput, ScrollView } from 'react-native';
 import {styles} from './styles.js'
 
-  class Test extends React.Component {
+  class History extends React.Component {
 
    render() {
     return (
@@ -15,4 +15,4 @@ import {styles} from './styles.js'
     }
 }
 
- export default Test;
+ export default History;

@@ -5,18 +5,20 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
-  Modal
+  Modal,
+  Alert
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
-import Test from "./components/test.js";
+//import History from "./components/History.js/index.js";
 
 import { styles } from "./components/styles.js";
 import ScanInfoScreen from "./components/ScanInfoScreen.js";
 import StatisticsScreen from "./components/StatisticsScreen.js";
 import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
+import * as FileSystem from "expo-file-system"
 
 const servURL = "http://10.140.189.199:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
@@ -28,14 +30,53 @@ export default class CameraScreen extends Component {
     indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: false
+    showScanInfoScreen: false,
+    categoryColors: [],
+    itemsList: [],
+    total: 0,
+    receiptList: [
+      {
+        "items": [
+          {
+            "category": 2,
+            "name": "WW FIVE GR BR",
+            "price": "1.90",
+          },
+          {
+            "category": 4,
+            "name": "SS SAUTE PAN",
+            "price": "10.99",
+          },
+          {
+            "category": 3,
+            "name": "PUBLIX BRAN FLAKES",
+            "price": "2.85",
+          },
+        ],
+        "total": 16.51,
+      },
+    ]
   };
+
+  addReceipt = (itemsList, totalPrice) => {
+    const newReceiptList = this.state.receiptList;
+    newReceiptList.push({
+      items: itemsList,
+      total: totalPrice,
+      date: new Date()
+    });
+    console.log(newReceiptList);
+    this.setState({receiptList:newReceiptList});
+    FileSystem.writeAsStringAsync(FileSystem.documentDirectory+"/data.txt", JSON.stringify(this.state.receiptList)).then(()=>{},(reason)=>{console.log(reason)});
+    this.toggleResult(false);
+  }
 
   componentDidMount = async () => {
     const perm = await Camera.requestPermissionsAsync();
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
+    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/data.txt").then((data)=>{const d =JSON.parse(data);}, (reason)=>{})
     setTimeout(() => {
       this.changeColor();
     }, 800);
@@ -49,6 +90,14 @@ export default class CameraScreen extends Component {
       this.changeColor();
     }, 800);
   };
+
+  changeItemList = (itemList) => {
+    this.setState({itemsList : itemList});
+  }
+
+  toggleResult = (on) => {
+    this.setState({showScanInfoScreen:on});
+  }
 
   take = async cam => {
     //console.log(cam);
@@ -69,11 +118,17 @@ export default class CameraScreen extends Component {
       body: JSON.stringify(data)
     }).then(
       res => {
-        res.text().then(content => {
+        res.json().then(content => {
           console.log(content);
+          if(content.response == "ERROR")
+            Alert.alert("We did not reconize receipt!");
+          else{
+          this.setState({itemsList: content.response.items});
+          this.setState({total: content.response.total});
+          this.setState({ showScanInfoScreen: true });
+          }
         });
         this.setState({ showLoading: false });
-        this.setState({ showScanInfoScreen: true });
       },
       reason => {
         console.log(reason);
@@ -99,7 +154,7 @@ export default class CameraScreen extends Component {
         showsPagination={false}
         index={1}
       >
-        <PurchaseHistory />
+        <PurchaseHistory list={this.state.receiptList} />
 
         <View key="1" style={styles.slideBody}>
           <Camera
@@ -129,13 +184,13 @@ export default class CameraScreen extends Component {
             visible={this.state.showLoading}
           >
             <ActivityIndicator
-              size={"large"}
+              size={60}
               color={this.state.indicatorColors[this.state.indicatorIndex]}
-              style={{ marginTop: 200 }}
+              style={{ marginTop: 350 }}
             />
           </Modal>
-          <Modal visible={this.state.showScanInfoScreen}>
-            <ScanInfoScreen />
+          <Modal visible={this.state.showScanInfoScreen} onRequestClose={() => this.toggleResult(false)}>
+            <ScanInfoScreen toggle={()=>this.toggleResult(false)} save={(list, total)=>this.addReceipt(list, total)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
           </Modal>
         </View>
         <StatisticsScreen />
