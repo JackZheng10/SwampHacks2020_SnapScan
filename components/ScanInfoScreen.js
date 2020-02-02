@@ -145,6 +145,7 @@ class ScanInfoScreen extends React.Component {
               name="check"
               type="material-community"
               color="#3FC272"
+              onPress={()=>{this.props.save(this.props.itemList, this.props.total)}}
             />
           </View>
         </SafeAreaView>

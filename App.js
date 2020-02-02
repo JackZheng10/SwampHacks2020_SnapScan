@@ -32,8 +32,41 @@ export default class CameraScreen extends Component {
     showScanInfoScreen: false,
     categoryColors: [],
     itemsList: [],
-    total: 0
+    total: 0,
+    receiptList: [
+      {
+        "items": [
+          {
+            "category": 2,
+            "name": "WW FIVE GR BR",
+            "price": "1.90",
+          },
+          {
+            "category": 4,
+            "name": "SS SAUTE PAN",
+            "price": "10.99",
+          },
+          {
+            "category": 3,
+            "name": "PUBLIX BRAN FLAKES",
+            "price": "2.85",
+          },
+        ],
+        "total": 16.51,
+      },
+    ]
   };
+
+  addReceipt = (itemsList, totalPrice) => {
+    const newReceiptList = this.state.receiptList;
+    newReceiptList.push({
+      items: itemsList,
+      total: totalPrice
+    });
+    console.log(newReceiptList);
+    this.setState({receiptList:newReceiptList});
+    this.toggleResult(false);
+  }
 
   componentDidMount = async () => {
     const perm = await Camera.requestPermissionsAsync();
@@ -117,7 +150,7 @@ export default class CameraScreen extends Component {
         showsPagination={false}
         index={1}
       >
-        <PurchaseHistory />
+        <PurchaseHistory list={this.state.receiptList} />
 
         <View key="1" style={styles.slideBody}>
           <Camera
@@ -147,13 +180,13 @@ export default class CameraScreen extends Component {
             visible={this.state.showLoading}
           >
             <ActivityIndicator
-              size={"large"}
+              size={60}
               color={this.state.indicatorColors[this.state.indicatorIndex]}
-              style={{ marginTop: 200 }}
+              style={{ marginTop: 350 }}
             />
           </Modal>
           <Modal visible={this.state.showScanInfoScreen} onRequestClose={() => this.toggleResult(false)}>
-            <ScanInfoScreen toggle={()=>this.toggleResult(false)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
+            <ScanInfoScreen toggle={()=>this.toggleResult(false)} save={(list, total)=>this.addReceipt(list, total)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
           </Modal>
         </View>
         <StatisticsScreen />

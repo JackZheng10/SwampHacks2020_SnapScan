@@ -5,119 +5,22 @@ import {
   SafeAreaView,
   TextInput,
   ScrollView,
-  Dimensions
+  Dimensions, Modal
 } from "react-native";
 import { styles } from "./styles.js";
 import { Header, Icon, ListItem, Badge } from "react-native-elements";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
-
-const chartConfig = {
-  backgroundGradientFrom: "white",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "white",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `#70C4FF`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5
-};
-
-let list = [
-  {
-    name: "Amy Farha",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-    subtitle: "Vice President"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  },
-  {
-    name: "Chris Jackson",
-    avatar_url:
-      "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-    subtitle: "Vice Chairman"
-  }
-];
-
-const onPress = key => {
-  console.log("Item with ID: " + key + "was pressed");
-};
 
 //"#3FC272", "#F5E184", "#F56B5E",
 class PurchaseHistory extends React.Component {
   state = {
-    purchaseList: []
+    popup: true,
+    list: [],
+    total: 0
+  };
+
+
+  onPress = key => {
+    this.setState({popup:true});
   };
 
   render() {
@@ -134,18 +37,42 @@ class PurchaseHistory extends React.Component {
         />
         <ScrollView>
           <View>
-            {list.map((l, i) => (
+            {this.props.list.map((l,i) => (
               <ListItem
-                key={i}
-                leftAvatar={{ source: { uri: l.avatar_url } }}
-                title={l.name}
-                subtitle={l.subtitle}
-                bottomDivider
-                onPress={() => onPress(i)}
-              />
+              key={i}
+              title={i}
+              subtitle={"total: "+i.total}
+              bottomDivider
+              onPress={() => this.onPress(i)}
+            />
             ))}
           </View>
         </ScrollView>
+        <Modal visible={this.state.popup} transparent={true} onRequestClose={()=>{this.setState({popup:false})}}>
+          <View style={{flex: 1,
+        flexDirection: 'column',
+        paddingTop: 50,
+        backgroundColor: "#55555588"
+          }}>
+          <SafeAreaView style={{flex: 1,
+          marginVertical: 100,
+          marginHorizontal: 20,
+          padding: 10,
+          backgroundColor: "#FFF",
+          borderRadius: 10,}}>
+            <SafeAreaView style={{flex: 1, flexDirection: "column"}}>
+                <Text style={{textAlign:"center", marginTop: 20}}>Receipt</Text>
+                <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Date: </Text>
+              <ScrollView>
+              
+              </ScrollView>
+              <Text style={{textAlign:"right", marginTop: 20, marginRight: 10}}>Total: {this.state.total}</Text>
+              <Text></Text>
+            </SafeAreaView>
+          </SafeAreaView>
+          </View>
+
+      </Modal>
       </SafeAreaView>
     );
   }

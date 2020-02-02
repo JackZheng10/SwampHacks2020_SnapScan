@@ -21,8 +21,9 @@ const chartConfig = {
   backgroundGradientFromOpacity: 0,
   backgroundGradientTo: "white",
   backgroundGradientToOpacity: 0,
-  color: (opacity = 1) => ['white'],
+  color: (opacity = 1) => `rgba(150, 150, 150, ${opacity})`,
   strokeWidth: 2, // optional, default 3
+  
 };
 const data = [
   {
@@ -64,12 +65,12 @@ const data = [
 
 
 const lineData = { 
-  labels: ['Sept', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'], 
+  labels: ['Aug','Sept', 'Oct', 'Nov', 'Dec', 'Jan'], 
   datasets: [
     { data: [ 60, 52, 55, 48, 50, 40 ], color: (opacity = 1) => `#70C4FF`},
     { data: [ 50, 50, 50, 50, 50, 50 ], color: (opacity = 1) => `#3FC272`}
   ],
-  legend: ['test', 'test2']
+  legend: ['Spent', 'Goal']
 };
 
 
@@ -114,7 +115,8 @@ class StatisticsScreen extends React.Component {
         />
 
         <LineChart
-          width={Dimensions.get("window").width - 25}
+        
+          width={Dimensions.get("window").width}
           height={220}
           chartConfig={chartConfig}
           data={lineData}
