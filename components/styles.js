@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 export const styles = StyleSheet.create({
-
   takeButton: {
     alignItems: "center",
     justifyContent: "center",
@@ -34,6 +33,15 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
     fontSize: 30
   },
-
-  totalPrice: {}
+  confirmDeny: {
+    left: 10,
+    zIndex: 1,
+    marginBottom: 20,
+    flexDirection: "row"
+  },
+  confirmDenyBar: {
+    height: 65,
+    zIndex: 0,
+    flexDirection: "row"
+  }
 });

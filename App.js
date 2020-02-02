@@ -12,9 +12,9 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import ViewPager from "@react-native-community/viewpager";
 import Test from "./components/test.js";
 
-import {styles} from './components/styles.js';
-import ScanInfoScreen from './components/ScanInfoScreen.js';
-import StatisticsScreen from './components/StatisticsScreen.js';
+import { styles } from "./components/styles.js";
+import ScanInfoScreen from "./components/ScanInfoScreen.js";
+import StatisticsScreen from "./components/StatisticsScreen.js";
 
 const servURL = "http://10.140.189.199:3001/blog";
 const lservURL = "http://10.140.187.64:3000/blog";
@@ -26,8 +26,7 @@ export default class CameraScreen extends Component {
     indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: false,
-
+    showScanInfoScreen: true
   };
 
   componentDidMount = async () => {
@@ -137,7 +136,7 @@ export default class CameraScreen extends Component {
             <ScanInfoScreen />
           </Modal>
         </View>
-        <StatisticsScreen/>
+        <StatisticsScreen />
       </ViewPager>
     );
   }
