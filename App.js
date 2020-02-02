@@ -15,6 +15,7 @@ import Test from "./components/test.js";
 import { styles } from "./components/styles.js";
 import ScanInfoScreen from "./components/ScanInfoScreen.js";
 import StatisticsScreen from "./components/StatisticsScreen.js";
+import Swiper from "react-native-swiper";
 
 const servURL = "http://10.140.189.199:3001/blog";
 const lservURL = "http://10.140.187.64:3000/blog";
@@ -26,7 +27,7 @@ export default class CameraScreen extends Component {
     indicatorColors: ["#70C4FF", "#3FC272", "#F5E184", "#F56B5E"],
     indicatorIndex: 0,
     showLoading: false,
-    showScanInfoScreen: true
+    showScanInfoScreen: false
   };
 
   componentDidMount = async () => {
@@ -58,7 +59,7 @@ export default class CameraScreen extends Component {
     console.log("done");
     //console.log(data.base64);
     console.log("trying sending to server");
-    fetch(lservURL, {
+    fetch(servURL, {
       method: "POST",
       Accept: "application/json",
       headers: {
@@ -88,12 +89,13 @@ export default class CameraScreen extends Component {
       return <Text>No access to camera</Text>;
     }
     return (
-      <ViewPager
+      <Swiper
         style={{
           flex: 1
         }}
-        initialPage={1}
-        orientation="horizontal"
+        loop={false}
+        showsPagination={false}
+        index={1}
       >
         <View key="0" style={styles.slideBody}>
           <Text>test</Text>
@@ -137,7 +139,7 @@ export default class CameraScreen extends Component {
           </Modal>
         </View>
         <StatisticsScreen />
-      </ViewPager>
+      </Swiper>
     );
   }
 }
