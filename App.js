@@ -53,7 +53,7 @@ export default class CameraScreen extends Component {
       d.getMinutes() +
       ":" +
       d.getSeconds();
-    newReceiptList.push({
+    newReceiptList.unshift({
       items: itemsList,
       total: totalPrice,
       date: curDate
