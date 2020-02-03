@@ -16,12 +16,14 @@ class PurchaseHistory extends React.Component {
   state = {
     popup: false,
     list: [],
-    total: 0
+    total: 0,
+    date: ""
   };
 
   showReceipt = data => {
     this.setState({ list: data.items });
     this.setState({ total: data.total });
+    this.setState({ date: data.date });
     this.setState({ popup: true });
   };
 
@@ -43,25 +45,12 @@ class PurchaseHistory extends React.Component {
               <ListItem
                 key={i}
                 title={l.date}
-                subtitle={"total: " + l.total}
+                subtitle={"Total: " + l.total}
                 bottomDivider
                 onPress={() => this.showReceipt(l)}
               />
             ))}
           </View>
-          <Modal
-            visible={this.state.showList}
-            onRequestClose={() => (this.state.showList = false)}
-          >
-            <View>
-              {this.state.currentPurchasedItems.map((
-                l,
-                i //i = index, l = item
-              ) => (
-                <ListItem title={"Name"} subtitle={"Price"} bottomDivider />
-              ))}
-            </View>
-          </Modal>
         </ScrollView>
         <Modal
           visible={this.state.popup}
@@ -97,7 +86,7 @@ class PurchaseHistory extends React.Component {
                 <Text
                   style={{ textAlign: "right", marginTop: 20, marginRight: 10 }}
                 >
-                  Date:{" "}
+                  Date: {this.state.date}
                 </Text>
                 <ScrollView>
                   {this.state.list.map((l, i) => (
