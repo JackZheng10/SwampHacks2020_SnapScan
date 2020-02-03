@@ -212,7 +212,7 @@ class StatisticsScreen extends React.Component {
           backgroundColor="transparent"
           paddingLeft="2"
           absolute={true}
-          style={({ marginBottom: 50, marginTop: 30 }, { marginLeft: 5 })}
+          style={({ marginBottom: 50, marginTop: 30 }, { marginLeft: 2 })}
         />
 
         <LineChart
