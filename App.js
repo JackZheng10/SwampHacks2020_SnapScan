@@ -18,11 +18,11 @@ import ScanInfoScreen from "./components/ScanInfoScreen.js";
 import StatisticsScreen from "./components/StatisticsScreen.js";
 import PurchaseHistory from "./components/PurchaseHistory.js";
 import Swiper from "react-native-swiper";
-import * as FileSystem from "expo-file-system"
+import * as FileSystem from "expo-file-system";
 
-const servURL = "http://10.140.189.199:3001/receipt";
+const servURL = "http://10.136.104.219:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
-const saveFile = "savefile.txt"
+const saveFile = "savefile.txt";
 export default class CameraScreen extends Component {
   state = {
     permission: null,
@@ -41,24 +41,51 @@ export default class CameraScreen extends Component {
   addReceipt = (itemsList, totalPrice) => {
     const newReceiptList = this.state.receiptList;
     const d = new Date();
-    const curDate = d.getFullYear() + "-" +(d.getMonth()+1) + "-" + d.getDate() + " "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+    const curDate =
+      d.getFullYear() +
+      "-" +
+      (d.getMonth() + 1) +
+      "-" +
+      d.getDate() +
+      " " +
+      d.getHours() +
+      ":" +
+      d.getMinutes() +
+      ":" +
+      d.getSeconds();
     newReceiptList.push({
       items: itemsList,
       total: totalPrice,
       date: curDate
     });
     console.log(newReceiptList);
-    this.setState({receiptList:newReceiptList});
-    FileSystem.writeAsStringAsync(FileSystem.documentDirectory+"/"+saveFile, JSON.stringify(this.state.receiptList)).then(()=>{},(reason)=>{console.log(reason)});
+    this.setState({ receiptList: newReceiptList });
+    FileSystem.writeAsStringAsync(
+      FileSystem.documentDirectory + "/" + saveFile,
+      JSON.stringify(this.state.receiptList)
+    ).then(
+      () => {},
+      reason => {
+        console.log(reason);
+      }
+    );
     this.toggleResult(false);
-  }
+  };
 
   componentDidMount = async () => {
     const perm = await Camera.requestPermissionsAsync();
     console.log(perm.status);
     this.setState({ permission: perm.status == "granted" });
     console.log(this.state.permission);
-    FileSystem.readAsStringAsync(FileSystem.documentDirectory+"/"+saveFile).then((data)=>{const d = JSON.parse(data); this.setState({receiptList:d})}, (reason)=>{});
+    FileSystem.readAsStringAsync(
+      FileSystem.documentDirectory + "/" + saveFile
+    ).then(
+      data => {
+        const d = JSON.parse(data);
+        this.setState({ receiptList: d });
+      },
+      reason => {}
+    );
     setTimeout(() => {
       this.changeColor();
     }, 800);
@@ -73,13 +100,13 @@ export default class CameraScreen extends Component {
     }, 800);
   };
 
-  changeItemList = (itemList) => {
-    this.setState({itemsList : itemList});
-  }
+  changeItemList = itemList => {
+    this.setState({ itemsList: itemList });
+  };
 
-  toggleResult = (on) => {
-    this.setState({showScanInfoScreen:on});
-  }
+  toggleResult = on => {
+    this.setState({ showScanInfoScreen: on });
+  };
 
   take = async cam => {
     //console.log(cam);
@@ -102,12 +129,12 @@ export default class CameraScreen extends Component {
       res => {
         res.json().then(content => {
           console.log(content);
-          if(content.response == "ERROR")
+          if (content.response == "ERROR")
             Alert.alert("We did not reconize receipt!");
-          else{
-          this.setState({itemsList: content.response.items});
-          this.setState({total: content.response.total});
-          this.setState({ showScanInfoScreen: true });
+          else {
+            this.setState({ itemsList: content.response.items });
+            this.setState({ total: content.response.total });
+            this.setState({ showScanInfoScreen: true });
           }
         });
         this.setState({ showLoading: false });
@@ -171,11 +198,20 @@ export default class CameraScreen extends Component {
               style={{ marginTop: 350 }}
             />
           </Modal>
-          <Modal visible={this.state.showScanInfoScreen} onRequestClose={() => this.toggleResult(false)}>
-            <ScanInfoScreen toggle={()=>this.toggleResult(false)} save={(list, total)=>this.addReceipt(list, total)} itemList={this.state.itemsList} total={this.state.total} cl={(list)=>this.changeItemList(list)}/>
+          <Modal
+            visible={this.state.showScanInfoScreen}
+            onRequestClose={() => this.toggleResult(false)}
+          >
+            <ScanInfoScreen
+              toggle={() => this.toggleResult(false)}
+              save={(list, total) => this.addReceipt(list, total)}
+              itemList={this.state.itemsList}
+              total={this.state.total}
+              cl={list => this.changeItemList(list)}
+            />
           </Modal>
         </View>
-        <StatisticsScreen list={this.state.receiptList}/>
+        <StatisticsScreen dataList={this.state.receiptList} />
       </Swiper>
     );
   }
