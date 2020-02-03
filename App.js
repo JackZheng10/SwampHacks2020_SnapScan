@@ -22,7 +22,7 @@ import * as FileSystem from "expo-file-system";
 
 const servURL = "http://10.136.104.219:3001/receipt";
 const lservURL = "http://10.140.187.64:3000/blog";
-const saveFile = "save3.txt";
+const saveFile = "savefile.txt";
 export default class CameraScreen extends Component {
   state = {
     permission: null,
@@ -53,7 +53,7 @@ export default class CameraScreen extends Component {
       d.getMinutes() +
       ":" +
       d.getSeconds();
-    newReceiptList.unshift({
+    newReceiptList.push({
       items: itemsList,
       total: totalPrice,
       date: curDate
