@@ -21,7 +21,7 @@ const chartConfig = {
 let current_month_data = [38, 26, 54, 15, 32];
 let last_month_data = [235, 248, 150, 140, 80];
 let six_month_data = [1384, 1188, 712, 680, 480];
-let twelve_month_data = [2574, 2301, 1522, 1121, 800];
+let twelve_month_data = [257, 230, 87, 112, 90];
 
 const graphData = [
   {
