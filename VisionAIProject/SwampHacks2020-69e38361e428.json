@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "tokyo-silicon-266903",
+  "private_key_id": "69e38361e42820baccc8b60ad6578b2e70275599",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCKU9aZoC5Jx8Zm\ncpN5fDZzkXaMh8RtTrHbt9T0dhsbwDUSaCfHDJHjmCgIn4mg0+j1sa6b3KRFMpNr\nzmLWmbEqg9fv4PIzQzb7eICDsTestoYVTJN+zmY4ZKhTx05e5wJ/YkL3gExAxzxp\ngJc8CzfoYKC03kzeYN7KX0qfWe6QHXKzYKIJUIwuq5VYMQl/eRjCmxu1yaD/ArXt\nZYwGHJFAzwpkW6HsR/W9+SlhoeTa5hZaiy2kAjvgd7injwjkQGaCRt58V99YgV/N\nHc89no4lN3qObk4B4vzEZjoKrfgMImU4W2JZCapVRLhOLsrNl3n2vXNn3eA9InkQ\npkK1a4u1AgMBAAECggEAC3ljXHhvRoL6B976sTHWwXTgQM11Q3zq33crBME0Q/PI\nYze9DvORuW+SaI61R6A0W4cK3RZrEOteU6u5wqPakJSBqb3+0TZC3g6zmFjvrZWx\nXxxsQrFDxOtClDp8233tlNv1gprDmH7+WaEHSn2CvHWhdwdWmH6wFFjds4St94m+\nkCfrVaXfSyJFA9+FtUs9CW7X7fHzniumiYFj6dAts/r35HBT7Evx2FPb6lTCy7u/\nDvs4zuJA376o6JNVKLPyE7O8keDkwqoF83EjjgSUoMtj9qKmKCg1QbIlIxxqQxLx\ni6p+HKe1n2xP9NB4ob9a45+KrwOUQLLw0Ih0Px8tsQKBgQDC5FPNHzhaz5YJCQAT\nfF10SmYJFCYuvT7z2oK5zVW9oBtyEQ/MCcKUrqzlZVCJF2a6cesnPQj1fNZlvD4r\nFsfv9XByUt+wrH/jcLDKEhniJi0ckCEyoN93v45A8PnZe2Goa+9ugs+pG1PXE4Ca\nprA/gH0hB0GxchRY3f2gks4PRQKBgQC1syxD/OLOTYcmF0rJZtySV9ZzBoN66nro\n7bL37qyYl2GUa9IHUyhnCg+oz5WliE1AfafjLEiHey+dYguSg4VCPI5EDu9sNKnC\n1bSKTSudiIjOkFl6axX7w511TaqW4lo20ZOOEMsCYraZJmk5toU/npOQkhEuJ/gN\nFH7xw1RZsQKBgGU0DBBIVgtSIKcwdUmpGx54Q+QTAoDi5P3cSmYRqqR9r8Lb+UgL\nCXAMBNxacCfAbygCYApQN4bC/NJ3nhDiE5EX8vxq7J3h9cc1jZhhLe+xw1tBvPt9\nbo3Qex5eBGBbIatD4WGRrCQ0fKUDC5VDWeKf5lpwWjy68LX1EO+BTF/BAoGBAITm\nyTnxfvPnQTNbVhh6ZFumY/U+jm0ZlU1Kj91JdnUmRPmK49T3vlWfxlRzgcHSMK87\nOdGwUlzGfc1gKZbBHHeWU3j0c6tx2bnpFmUSjRRtCaQNcWVZbnr4WfOzG1PBvLrc\nEFGZduQH0Ae1UMIl/tDJ7KWSMX7RPV5T34Z2mPwBAoGBALiMGKFQG6KZIQv0W1gb\nnV7k8fvayuUJQ3naWjuxHv6hjXYNkk113usl8fPA3CIa8plOuQ4iOWSxFcU10Z9N\nHdngFmWfguXeNrwDf9HAkBE7YKhx4vlIorYeJnwP37fnMr+AGy8AJxFYK42ONH43\nadlMfZFM//v2QNfY4k7b4czD\n-----END PRIVATE KEY-----\n",
+  "client_email": "swamphacks2020-serviceaccount@tokyo-silicon-266903.iam.gserviceaccount.com",
+  "client_id": "113831456077625715270",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/swamphacks2020-serviceaccount%40tokyo-silicon-266903.iam.gserviceaccount.com"
+}
