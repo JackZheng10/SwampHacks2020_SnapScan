@@ -6,7 +6,7 @@
 ----------------------------------------------------------
 
 ## What it does
-SnapScan is a mobile app that allows users to track their expenses in a variety of categories including Groceries, Restaurants, Clothing, Entertainment, and Miscellaneous. As opposed to other budgeting apps that either don't provide detailed analyses or require strenuous entering of data, SnapScan allows users to take a picture of their receipts, extract information regarding all the purchases, and generate thorough analyses that show you exactly where you need to cut down on spending
+SnapScan is a mobile app that allows users to track their expenses in a variety of categories including Groceries, Restaurants, Clothing, Entertainment, and Miscellaneous. As opposed to other budgeting apps that either don't provide detailed analyses or require strenuous entering of data, SnapScan allows users to take a picture of their receipts, extract information regarding all the purchases, and generate thorough analyses that show you exactly where you need to cut down on spending. Tax is included in the final price but excluded from tracking. 
 
 ----------------------------------------------------------
 
