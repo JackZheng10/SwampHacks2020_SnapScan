@@ -13,6 +13,8 @@
 * Finally, scan the QR code generated in the main directory's CLI using the Expo app on your phone
 * Note: The app was developed and tested on an Android device 
 
+----------------------------------------------------------
+
 ## Inspiration
 1 out of every 5 working Americans put absolutely no money towards saving every year. 69% are saving less than 10% of their annual income<sup>[1]</sup>. As a country, we are currently facing a savings crisis. With daily discretionary spending being higher than it's ever been and income remaining relatively stagnant, fewer and fewer Americans are saving and preparing for retirement. A study by Bankrate shows that the most prominent cause for this lack of saving is expenses<sup>[1]</sup>. We propose SnapScan in order to give people an easy, stress-free means to keep track of their expenses, stay within their budgets, and gain control of their financial lives.
 
