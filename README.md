@@ -1,16 +1,16 @@
 # SwampHacks 2020 - SnapScan
 
 ### How to run:
--Change the server IP in servURL located in /App.js to your IPv4 address
-  -Optional: Change the PORT in /backend/app.js from 3001 to your desired port and also make the same change in servURL 
--Run npm install from main directory
-  -Make sure expo-cli is installed and you have the mobile app
-  -Apply the fixes from user "alaast" explained here: https://github.com/leecade/react-native-swiper/issues/1108
-  -Run npm start
--Run npm install from /backend
-  -Install any necessary missing packages
-  -Run npm start
--Finally, scan the QR code generated in the main directory's CLI using the Expo app on your phone
+*Change the server IP in servURL located in /App.js to your IPv4 address
+  *Optional: Change the PORT in /backend/app.js from 3001 to your desired port and also make the same change in servURL 
+*Run npm install from main directory
+  *Make sure expo-cli is installed and you have the mobile app
+  *Apply the fixes from user "alaast" explained here: https://github.com/leecade/react-native-swiper/issues/1108
+  *Run npm start
+*Run npm install from /backend
+  *Install any necessary missing packages
+  *Run npm start
+*Finally, scan the QR code generated in the main directory's CLI using the Expo app on your phone
 
 ## Inspiration
 1 out of every 5 working Americans put absolutely no money towards saving every year. 69% are saving less than 10% of their annual income<sup>[1]</sup>. As a country, we are currently facing a savings crisis. With daily discretionary spending being higher than it's ever been and income remaining relatively stagnant, fewer and fewer Americans are saving and preparing for retirement. A study by Bankrate shows that the most prominent cause for this lack of saving is expenses<sup>[1]</sup>. We propose SnapScan in order to give people an easy, stress-free means to keep track of their expenses, stay within their budgets, and gain control of their financial lives.
