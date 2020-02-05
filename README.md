@@ -11,7 +11,7 @@
 * Run npm install from /backend
   * Install any necessary missing packages
   * Run npm start
-* Finally, scan the QR code generated in the main directory's CLI using the Expo app on your phone
+* Finally, scan the QR code generated in the main directory's command line interface using the Expo app on your phone
 * Note: The app was developed and tested on an Android device 
 
 ----------------------------------------------------------
