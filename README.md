@@ -3,6 +3,7 @@
 ### How to run the app:
 * Change the IP in servURL located in /App.js to your IPv4 address
   * Optional: Change the PORT in /backend/app.js from 3001 to your desired port and also make the same change in servURL 
+* Change the file directories used (beginning with "C:\\") in /backend/routes/receipt.js to your desired directory 
 * Run npm install from the main directory
   * Make sure the package expo-cli is installed and that you have the Expo mobile app
   * Apply the fixes from user "alaast" explained here: https://github.com/leecade/react-native-swiper/issues/1108
