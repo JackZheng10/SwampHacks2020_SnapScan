@@ -1,6 +1,6 @@
 # SwampHacks 2020 - SnapScan
 
-## How to run the app:
+## How to run the app locally
 * Change the IP in servURL located in /App.js to your IPv4 address
   * Optional: Change the PORT in /backend/app.js from 3001 to your desired port and also make the same change in servURL 
 * Change the file directories used (beginning with "C:") in /backend/routes/receipt.js to your desired directory 
